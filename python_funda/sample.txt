@@ -1,0 +1,1 @@
+{'name': 'vinamika', 'age': 20, 'gender': 'female', 'address': 'hyderabad', 'phone': 1234567890}
