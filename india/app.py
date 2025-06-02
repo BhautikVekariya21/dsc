@@ -5,7 +5,7 @@ import plotly.express as px
 
 st.set_page_config(layout="wide", page_title="India's Analysis")
 
-df = pd.read_csv(r'C:\Users\bhaut\OneDrive\Desktop\dsc\india\cleaned_data.csv')
+df = pd.read_csv('cleaned_data.csv')
 
 list_of_states = df['State'].unique().tolist()
 list_of_states.insert(0, 'Overall India')
