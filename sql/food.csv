@@ -1,0 +1,51 @@
+f_id,f_name,type
+1,Non-veg Pizza,Non-veg
+2,Veg Pizza,Veg
+3,Choco Lava cake,Veg
+4,Chicken Wings,Non-veg
+5,Chicken Popcorn,Non-veg
+6,Rice Meal,Veg
+7,Roti meal,Veg
+8,Masala Dosa,Veg
+9,Rava Idli,Veg
+10,Schezwan Noodles,Veg
+11,Veg Manchurian,Veg
+12,Chicken Biryani,Non-veg
+13,Mutton Biryani,Non-veg
+14,Veg Biryani,Veg
+15,Paneer Butter Masala,Veg
+16,Dal Tadka,Veg
+17,Butter Chicken,Non-veg
+18,Fish Curry,Non-veg
+19,Prawn Masala,Non-veg
+20,Veg Fried Rice,Veg
+21,Chicken Fried Rice,Non-veg
+22,Hakka Noodles,Veg
+23,Chilli Chicken,Non-veg
+24,Paneer Tikka,Veg
+25,Chicken Tikka,Non-veg
+26,Veg Burger,Veg
+27,Chicken Burger,Non-veg
+28,French Fries,Veg
+29,Onion Rings,Veg
+30,Chicken Nuggets,Non-veg
+31,Veg Sandwich,Veg
+32,Chicken Sandwich,Non-veg
+33,Masala Chai,Veg
+34,Cold Coffee,Veg
+35,Vanilla Ice Cream,Veg
+36,Chocolate Brownie,Veg
+37,Gulab Jamun,Veg
+38,Rasgulla,Veg
+39,Samosa,Veg
+40,Pav Bhaji,Veg
+41,Chole Bhature,Veg
+42,Aloo Paratha,Veg
+43,Tandoori Chicken,Non-veg
+44,Seekh Kebab,Non-veg
+45,Veg Pulao,Veg
+46,Jeera Rice,Veg
+47,Garlic Naan,Veg
+48,Butter Naan,Veg
+49,Chicken Curry,Non-veg
+50,Mutton Curry,Non-veg
