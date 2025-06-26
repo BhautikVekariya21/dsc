@@ -1,32 +1,67 @@
 # Complete Guide to Normal Distribution
 
+## Table of Contents
+
+1. [What is Normal Distribution?](#what-is-normal-distribution)
+2. [Why is Normal Distribution Important?](#why-is-normal-distribution-important)
+3. [PDF Equation and Parameters](#pdf-equation-and-parameters)
+4. [Standard Normal Variate](#standard-normal-variate)
+5. [Z-Tables](#z-tables)
+6. [Properties of Normal Distribution](#properties-of-normal-distribution)
+7. [Empirical Rule (68-95-99.7 Rule)](#empirical-rule-68-95-997-rule)
+8. [Skewness](#skewness)
+9. [Cumulative Distribution Function (CDF)](#cumulative-distribution-function-cdf)
+10. [Applications in Data Science](#applications-in-data-science)
+
+---
+
 ## What is Normal Distribution?
 
-Normal distribution, also known as **Gaussian distribution**, is a probability distribution that is commonly used in statistical analysis. It is a continuous probability distribution that is symmetrical around the mean, with a distinctive bell-shaped curve.
+Normal distribution, also known as **Gaussian distribution**, is a probability distribution that is commonly used in statistical analysis. It is a continuous probability distribution that is:
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Normal_Distribution_PDF.svg/800px-Normal_Distribution_PDF.svg.png" alt="Normal Distribution Bell Curve" width="600">
+- **Symmetrical** around the mean
+- **Bell-shaped** curve
+- Has **asymptotic** tails (approaching but never touching the x-axis)
+- Contains **lots of points near the mean** and **very few far away**
 
 ### Key Characteristics:
 
 - **Tail**: The distribution has tails that extend infinitely in both directions
-- **Asymptotic in nature**: The tails approach but never touch the x-axis
-- **Concentration around mean**: Lots of data points near the mean and very few far away
-- **Symmetrical**: Perfectly balanced around the center
+- **Asymptotic nature**: The tails approach but never touch the x-axis
+- **Concentration**: Most data points cluster around the mean
 
-## Parameters of Normal Distribution
+---
 
-The normal distribution is characterized by two parameters:
+## Why is Normal Distribution Important?
 
-1. **Mean (μ)**: Represents the center of the distribution
-2. **Standard deviation (σ)**: Represents the spread of the distribution
+### Commonality in Nature
 
-**Notation**: X ~ N(μ, σ²)
+Many natural phenomena follow a normal distribution, including:
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Standard_deviation_diagram.svg/800px-Standard_deviation_diagram.svg.png" alt="Standard Deviation in Normal Distribution" width="600">
+- Heights of people
+- Weights of objects
+- IQ scores of a population
+- Measurement errors
+- Test scores
 
-## PDF Equation of Normal Distribution
+This makes the normal distribution a convenient way to model and analyze real-world data.
 
-The probability density function (PDF) of a normal distribution is:
+---
+
+## PDF Equation and Parameters
+
+The normal distribution is characterized by **two parameters**:
+
+- **μ (mu)**: The mean - represents the center of the distribution
+- **σ (sigma)**: The standard deviation - represents the spread of the distribution
+
+### Notation:
+
+```
+X ~ N(μ, σ²)
+```
+
+### Probability Density Function (PDF):
 
 ```
 f(x) = (1 / (σ√(2π))) * e^(-(x-μ)²/(2σ²))
@@ -34,37 +69,24 @@ f(x) = (1 / (σ√(2π))) * e^(-(x-μ)²/(2σ²))
 
 Where:
 
-- **x** = random variable
-- **μ** = mean
-- **σ** = standard deviation
-- **e** = Euler's number (≈ 2.718)
-- **π** = Pi (≈ 3.14159)
+- e ≈ 2.71828 (Euler's number)
+- π ≈ 3.14159
+- x = variable value
+- μ = mean
+- σ = standard deviation
 
-<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/8b13f4c6c0e7c3db99b2d7fd8f945f5bcc8a0b8d" alt="Normal Distribution PDF Formula" width="400">
+---
 
-## Why is Normal Distribution Important?
+## Standard Normal Variate
 
-### Commonality in Nature
-
-Many natural phenomena follow a normal distribution:
-
-- Heights of people
-- Weights of objects
-- IQ scores of a population
-- Measurement errors
-- Blood pressure readings
-- Test scores
-
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/The_Normal_Distribution.svg/800px-The_Normal_Distribution.svg.png" alt="Real-world examples of normal distribution" width="600">
-
-## Standard Normal Variate (Z-Score)
+### What is Standard Normal Variate?
 
 A **Standard Normal Variate (Z)** is a standardized form of the normal distribution with:
 
 - **Mean = 0**
 - **Standard deviation = 1**
 
-### Formula for Standardization:
+### Standardization Formula:
 
 ```
 Z = (X - μ) / σ
@@ -72,190 +94,256 @@ Z = (X - μ) / σ
 
 Where:
 
-- **Z** = standardized value
-- **X** = original value
-- **μ** = population mean
-- **σ** = population standard deviation
-
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Normal_distribution_and_scales.gif/800px-Normal_distribution_and_scales.gif" alt="Standard Normal Distribution" width="600">
+- Z = standardized value
+- X = original value
+- μ = mean of original distribution
+- σ = standard deviation of original distribution
 
 ### Benefits of Standardization:
 
-1. **Comparison**: Allows comparison between different distributions
-2. **Probability calculation**: Enables use of standard Z-tables
+1. **Comparison**: Allows comparison of different distributions
+2. **Probability calculation**: Use standardized tables or software
 3. **Universal reference**: Creates a common scale for all normal distributions
+
+### Example Problem:
+
+_Heights of adult males follow N(68, 3²). What's the probability that a randomly selected male is taller than 72 inches?_
+
+**Solution:**
+
+```
+Z = (72 - 68) / 3 = 4/3 = 1.33
+```
+
+---
 
 ## Z-Tables
 
-A z-table tells you the area underneath a normal distribution curve, to the left of the z-score. This represents the cumulative probability.
+### What are Z-Tables?
 
-<img src="https://www.mathsisfun.com/data/images/normal-distrubution-large.svg" alt="Z-table visualization" width="600">
+A **z-table** tells you the area underneath a normal distribution curve, to the left of the z-score.
 
-**Example**: If Z = 1.96, the z-table shows that approximately 97.5% of the data falls below this value.
+### Key Points:
+
+- Shows cumulative probability P(Z ≤ z)
+- Values range from 0 to 1
+- Used to find probabilities for standardized normal distribution
+- Available online at resources like ztable.net
+
+### Usage:
+
+1. Calculate Z-score using standardization formula
+2. Look up Z-score in z-table
+3. Read corresponding probability value
+
+---
 
 ## Properties of Normal Distribution
 
 ### 1. Symmetricity
 
-The normal distribution is perfectly symmetric about its mean. The probability of observing a value above the mean equals the probability of observing a value below the mean.
+- The normal distribution is **symmetric about its mean**
+- Probability of observing a value above the mean = Probability of observing a value below the mean
+- The bell-shaped curve reflects this symmetry
 
 ### 2. Measures of Central Tendency
 
 In a normal distribution:
 
 - **Mean = Median = Mode**
-
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Relationship_between_mean_and_median_under_different_skewness.png/800px-Relationship_between_mean_and_median_under_different_skewness.png" alt="Central tendencies in normal distribution" width="600">
+- All three measures of central tendency are equal and located at the center
 
 ### 3. Empirical Rule (68-95-99.7 Rule)
 
-- **68%** of data falls within **1 standard deviation** of the mean
-- **95%** of data falls within **2 standard deviations** of the mean
-- **99.7%** of data falls within **3 standard deviations** of the mean
-
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Empirical_Rule.PNG/800px-Empirical_Rule.PNG" alt="Empirical Rule Visualization" width="600">
+- **68%** of data falls within **1 standard deviation** of the mean (μ ± σ)
+- **95%** of data falls within **2 standard deviations** of the mean (μ ± 2σ)
+- **99.7%** of data falls within **3 standard deviations** of the mean (μ ± 3σ)
 
 ### 4. Area Under the Curve
 
-The total area under the normal distribution curve equals **1** (representing 100% probability).
+- Total area under the normal curve = 1
+- Represents the total probability
+- Area between any two points represents probability of values falling in that range
+
+---
+
+## Empirical Rule (68-95-99.7 Rule)
+
+For any normal distribution X ~ N(μ, σ):
+
+| Range  | Percentage of Population |
+| ------ | ------------------------ |
+| μ ± 1σ | ~68%                     |
+| μ ± 2σ | ~95%                     |
+| μ ± 3σ | ~99.7%                   |
+
+This rule helps in:
+
+- **Quality control**: Identifying unusual values
+- **Risk assessment**: Understanding data spread
+- **Outlier detection**: Values beyond 3σ are rare
+
+---
 
 ## Skewness
 
 ### What is Skewness?
 
-Skewness is a measure of the asymmetry of a probability distribution. It describes how much a dataset deviates from the normal distribution.
-
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Negative_and_positive_skew_diagrams_%28English%29.svg/800px-Negative_and_positive_skew_diagrams_%28English%29.svg.png" alt="Types of Skewness" width="600">
+**Skewness** is a measure of the asymmetry of a probability distribution. It describes the degree to which a dataset deviates from the normal distribution.
 
 ### Types of Skewness:
 
-- **Positive Skewness**: Tail is longer on the right side (mean > median > mode)
-- **Negative Skewness**: Tail is longer on the left side (mode > median > mean)
-- **Zero Skewness**: Perfectly symmetrical distribution (mean = median = mode)
+#### Positive Skewness (Right-skewed):
 
-### Skewness Formula:
+- Tail is longer on the **right side**
+- Mean > Median > Mode
+- Most data concentrated on the left
 
-```
-Skewness = E[(X - μ)³] / σ³
-```
+#### Negative Skewness (Left-skewed):
 
-### Interpretation:
+- Tail is longer on the **left side**
+- Mean < Median < Mode
+- Most data concentrated on the right
 
-- **Skewness = 0**: Normal distribution
-- **-0.5 < Skewness < 0.5**: Approximately symmetric
-- **Skewness < -1 or > 1**: Highly skewed
+#### Zero Skewness:
+
+- **Perfectly symmetrical** distribution
+- Mean = Median = Mode
+- Normal distribution has zero skewness
+
+### Key Insight:
+
+**The greater the skew, the greater the distance between mean, median, and mode.**
+
+### Impact on Normal Distribution:
+
+- Normal distribution assumes **zero skewness**
+- Skewed data indicates **non-normal distribution**
+- May require transformation for analysis
+
+---
 
 ## Cumulative Distribution Function (CDF)
 
-The CDF gives the probability that a random variable X is less than or equal to a specific value x.
+The **CDF** of a normal distribution gives the probability that a random variable X takes a value less than or equal to x.
+
+### Mathematical Definition:
 
 ```
 F(x) = P(X ≤ x) = ∫[from -∞ to x] f(t) dt
 ```
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Normal_Distribution_CDF.svg/800px-Normal_Distribution_CDF.svg.png" alt="Normal Distribution CDF" width="600" />
+### Properties:
+
+- **Monotonically increasing**: Never decreases
+- **Range**: 0 to 1
+- **Smooth S-shaped curve**
+- **Inflection point** at the mean
+
+### Applications:
+
+- Finding probabilities for ranges
+- Percentile calculations
+- Hypothesis testing
+
+---
 
 ## Applications in Data Science
 
 ### 1. Outlier Detection
 
-Values beyond 3 standard deviations from the mean are typically considered outliers.
-
-<img src="https://miro.medium.com/v2/resize:fit:1400/1*_8tZEhvJhsIWrXcN0IPVQA.png" alt="Outlier detection using normal distribution" width="600" />
+- Values beyond **μ ± 3σ** are considered outliers
+- **Z-score method**: |Z| > 3 indicates outlier
+- Critical for data cleaning and preprocessing
 
 ### 2. Machine Learning Assumptions
 
-Many ML algorithms assume normal distribution:
+Many ML algorithms assume normality:
 
-- **Linear Regression**: Assumes residuals are normally distributed
-- **Gaussian Mixture Models (GMM)**: Explicitly uses normal distributions
+- **Linear Regression**: Residuals should be normally distributed
+- **Gaussian Mixture Models (GMM)**: Assumes normal components
+- **Principal Component Analysis**: Often works better with normal data
 
 ### 3. Hypothesis Testing
 
-Normal distribution is fundamental in:
-
-- t-tests
-- ANOVA
-- Confidence intervals
-- p-value calculations
-
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Student_t_pdf.svg/800px-Student_t_pdf.svg.png" alt="Hypothesis testing with normal distribution" width="600" />
+- **t-tests**: Compare means assuming normal distributions
+- **ANOVA**: Analysis of variance
+- **Confidence intervals**: Based on normal distribution properties
 
 ### 4. Central Limit Theorem
 
-States that the sampling distribution of sample means approaches a normal distribution as sample size increases, regardless of the population distribution.
+- **Sample means** approach normal distribution as sample size increases
+- Enables inference about population parameters
+- Foundation for many statistical methods
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/IllustrationCentralTheorem.png/800px-IllustrationCentralTheorem.png" alt="Central Limit Theorem" width="600" />
+### 5. Quality Control
 
-## Practical Example
+- **Control charts**: Monitor process variation
+- **Six Sigma**: Quality improvement methodology
+- **Process capability analysis**
 
-**Problem**: Heights of adult males follow N(68, 3²). What's the probability a randomly selected male is taller than 72 inches?
+### 6. Risk Management
 
-**Solution**:
-
-1. Calculate Z-score:  
-   \( Z = \frac{72 - 68}{3} = 1.33 \)
-
-2. From Z-table:  
-   \( P(Z \leq 1.33) = 0.9082 \)
-
-3. Probability of being taller than 72:  
-   \( P(X > 72) = 1 - 0.9082 = 0.0918 = 9.18\% \)
-
-![Normal Distribution with Z=1.33](https://upload.wikimedia.org/wikipedia/commons/8/8c/Standard_deviation_diagram.svg)
+- **Value at Risk (VaR)**: Financial risk assessment
+- **Monte Carlo simulations**: Risk modeling
+- **Portfolio optimization**
 
 ---
 
-# Interactive Visualization of Normal Distribution
+## Python Implementation Tips
 
-For hands-on experience with normal distributions, try these tools:
+### Generating Normal Distribution:
 
-- **[Normal Distribution Visualizer](https://samp-suman-normal-dist-visualize-app-lkntug.streamlit.app/)**  
-  Adjust mean (μ) and standard deviation (σ) to see real-time changes in the curve.
-- **[Z-table Calculator](https://www.ztable.net/)**  
-  Calculate probabilities for standard normal (Z) scores.
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy import stats
 
----
+# Generate normal distribution
+mu, sigma = 0, 1
+x = np.linspace(-4, 4, 100)
+y = stats.norm.pdf(x, mu, sigma)
 
-## Visualizing Tail Probabilities
+# Plot
+plt.plot(x, y)
+plt.title('Standard Normal Distribution')
+plt.show()
+```
 
-Here are alternative images for the standard normal distribution:
+### Standardization:
 
-### Annotated Bell Curve
+```python
+# Standardize data
+def standardize(data):
+    return (data - np.mean(data)) / np.std(data)
+```
 
-![Bell Curve with Tails](https://www.simplypsychology.org/wp-content/uploads/normal-distribution.jpg)  
-_Source: Simply Psychology_
+### Skewness Calculation:
 
-Key features:
+```python
+from scipy.stats import skew
 
-- **Right-tail probability**: Shaded area under the curve for \( P(Z > z) \).
-- **Symmetry**: Left-tail probabilities mirror the right tail (e.g., \( P(Z < -1.96) = P(Z > 1.96) \)).
-
----
-
-## Importance of Normal Distribution
-
-The normal distribution is foundational because:
-
-1. **Central Limit Theorem**  
-   Sample means approximate normality, enabling confidence intervals and hypothesis testing.
-2. **Empirical Rule**
-   - 68% of data falls within ±1σ of μ.
-   - 95% within ±2σ.
-   - 99.7% within ±3σ.
-3. **Standardization**  
-   Z-scores (\( \frac{X - μ}{σ} \)) allow cross-dataset comparisons.
+# Calculate skewness
+skewness = skew(data)
+```
 
 ---
 
-> _"The normal distribution is the backbone of statistical inference, turning randomness into measurable patterns."_  
-> — Adapted from [Investopedia](https://www.investopedia.com/terms/n/normaldistribution.asp).
+## Summary
 
-For further reading:
+Normal distribution is fundamental in statistics and data science because:
 
-- [LibreTexts on Normal Distributions](https://stats.libretexts.org/Bookshelves/Introductory_Statistics)
-- [Khan Academy Tutorial](https://www.khanacademy.org/math/statistics-probability/modeling-distributions-of-data)
+1. **Ubiquity**: Many natural phenomena follow normal distribution
+2. **Mathematical properties**: Well-defined and tractable
+3. **Statistical inference**: Foundation for many statistical tests
+4. **Machine learning**: Many algorithms assume normality
+5. **Standardization**: Enables comparison across different scales
 
----
+Understanding normal distribution and its properties is essential for:
 
-> _Normal distribution is the cornerstone of statistical analysis and data science, providing the mathematical foundation for understanding variability in natural phenomena and enabling powerful analytical techniques._
+- Data analysis and interpretation
+- Model selection and validation
+- Statistical inference and hypothesis testing
+- Quality control and process improvement
+
+The concepts of standardization, empirical rule, and skewness provide powerful tools for data scientists to understand, analyze, and make decisions based on data.
