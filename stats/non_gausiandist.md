@@ -35,6 +35,10 @@ Where:
 - μ = Mean
 - σ = Standard deviation
 
+### Mean and Standard Deviation for Kurtosis
+
+**Note**: Kurtosis itself is a statistical measure, not a distribution. The mean and standard deviation depend on the underlying distribution being analyzed.
+
 ### Practical Use Case in Finance
 
 **Kurtosis risk** refers to the risk associated with the possibility of extreme outcomes or "fat tails" in the distribution of returns of a particular asset or portfolio.
@@ -123,6 +127,20 @@ In finance, a mesokurtic distribution is considered **ideal for assets or portfo
 1. Compare observed data to expected normal distribution values
 2. Generate p-value
 3. **Interpretation**: p-value < 0.05 → data is NOT normal
+
+### Normal Distribution - Mean and Standard Deviation
+
+**Notation**: X ~ N(μ, σ²)
+
+#### Mean and Standard Deviation Formulas
+
+```
+Mean (μ) = μ (parameter)
+Standard Deviation (σ) = σ (parameter)
+Variance (σ²) = σ² (parameter)
+```
+
+**Note**: For normal distribution, the mean and standard deviation are the defining parameters of the distribution.
 
 ---
 
@@ -238,11 +256,24 @@ F(x) = (x-a)/(b-a) for a ≤ x ≤ b
 F(x) = 1           for x > b
 ```
 
-#### Key Statistics
+#### Mean and Standard Deviation Formulas
 
-- **Mean**: μ = (a + b)/2
-- **Variance**: σ² = (b - a)²/12
-- **Skewness**: 0 (perfectly symmetric)
+**Continuous Uniform Distribution U(a, b):**
+
+```
+Mean (μ) = (a + b)/2
+Variance (σ²) = (b - a)²/12
+Standard Deviation (σ) = (b - a)/√12 = (b - a)/(2√3)
+Skewness = 0 (perfectly symmetric)
+```
+
+**Discrete Uniform Distribution DU(a, b):**
+
+```
+Mean (μ) = (a + b)/2
+Variance (σ²) = [(b - a + 1)² - 1]/12
+Standard Deviation (σ) = √{[(b - a + 1)² - 1]/12}
+```
 
 ### Applications in Machine Learning and Data Science
 
@@ -317,11 +348,25 @@ F(x) = Φ((ln(x) - μ)/σ)
 
 Where Φ is the standard normal CDF.
 
-#### Key Statistics
+#### Mean and Standard Deviation Formulas
 
-- **Mean**: e^(μ + σ²/2)
-- **Variance**: (e^(σ²) - 1) · e^(2μ + σ²)
-- **Skewness**: Always positive (right-skewed)
+**Log-Normal Distribution LogNormal(μ, σ²):**
+
+```
+Mean (E[X]) = e^(μ + σ²/2)
+Variance (Var[X]) = (e^(σ²) - 1) · e^(2μ + σ²)
+Standard Deviation (σ_X) = √[(e^(σ²) - 1) · e^(2μ + σ²)]
+                         = e^(μ + σ²/2) · √(e^(σ²) - 1)
+Skewness = (e^(σ²) + 2) · √(e^(σ²) - 1) (always positive)
+```
+
+**Alternative formulation using geometric mean and geometric standard deviation:**
+
+```
+Geometric Mean = e^μ
+Geometric Standard Deviation = e^σ
+Mean = Geometric Mean × (Geometric Standard Deviation)^(σ²/2)
+```
 
 ### How to Check if Data is Log-Normally Distributed
 
@@ -402,11 +447,30 @@ f(x) = 0  for x < x_m
 F(x) = 1 - (x_m/x)^α  for x ≥ x_m
 ```
 
-#### Key Statistics
+#### Mean and Standard Deviation Formulas
 
-- **Mean**: α·x_m/(α-1) for α > 1
-- **Variance**: (x_m²·α)/((α-1)²·(α-2)) for α > 2
-- **Skewness**: Always positive (heavy right tail)
+**Pareto Distribution Pareto(α, x_m):**
+
+```
+Mean (μ) = (α · x_m)/(α - 1)     for α > 1
+         = ∞                     for α ≤ 1
+
+Variance (σ²) = (x_m² · α)/[(α - 1)² · (α - 2)]     for α > 2
+              = ∞                                     for α ≤ 2
+
+Standard Deviation (σ) = x_m · √[α/((α - 1)² · (α - 2))]     for α > 2
+                       = ∞                                     for α ≤ 2
+
+Skewness = 2(1 + α)/(α - 3) · √[(α - 2)/α]     for α > 3
+         = ∞                                     for α ≤ 3
+```
+
+**Important Notes:**
+
+- Mean exists only when α > 1
+- Variance exists only when α > 2
+- Higher moments exist only for correspondingly higher α values
+- This is characteristic of heavy-tailed distributions
 
 ### Real-World Examples
 
@@ -467,6 +531,14 @@ Y = ln(X)  or  Y = log₁₀(X)
 
 **Effect**: Compresses large values, expands small values
 
+**Mean and Standard Deviation after Log Transformation:**
+
+```
+If X ~ LogNormal(μ, σ²), then ln(X) ~ Normal(μ, σ²)
+Mean of ln(X) = μ
+Standard Deviation of ln(X) = σ
+```
+
 #### 2. Square Root Transformation
 
 **Usage**: Moderately right-skewed data, count data
@@ -476,6 +548,14 @@ Y = √X
 ```
 
 **Effect**: Less aggressive than log transformation
+
+**Mean and Standard Deviation after Square Root Transformation:**
+
+```
+If X has mean μ_X and variance σ²_X, then approximately:
+Mean of √X ≈ √μ_X - σ²_X/(8μ_X^(3/2))
+Variance of √X ≈ σ²_X/(4μ_X)
+```
 
 #### 3. Box-Cox Transformation
 
@@ -488,6 +568,8 @@ Y = ln(X)        for λ = 0
 
 **Advantage**: Automatically finds optimal λ parameter
 
+**Mean and Standard Deviation**: Depends on λ value and original distribution
+
 #### 4. Reciprocal Transformation
 
 **Usage**: Highly right-skewed data
@@ -498,6 +580,14 @@ Y = 1/X
 
 **Effect**: Strong compression of large values
 
+**Mean and Standard Deviation after Reciprocal Transformation:**
+
+```
+If X has mean μ_X and variance σ²_X, then approximately:
+Mean of 1/X ≈ 1/μ_X + σ²_X/μ_X³
+Variance of 1/X ≈ σ²_X/μ_X⁴
+```
+
 #### 5. Arcsin Transformation
 
 **Usage**: Proportion data (0 to 1)
@@ -507,6 +597,13 @@ Y = arcsin(√X)
 ```
 
 **Effect**: Stabilizes variance for proportions
+
+**Mean and Standard Deviation after Arcsin Transformation:**
+
+```
+For proportions p with variance p(1-p)/n:
+Variance of arcsin(√p) ≈ 1/(4n) (approximately constant)
+```
 
 ### Choosing the Right Transformation
 
@@ -524,6 +621,62 @@ Y = arcsin(√X)
 - **Very strong right skew**: Reciprocal transformation
 - **Left skew**: Try squaring or cubing
 - **Proportions**: Arcsin transformation
+
+---
+
+## Additional Common Distributions
+
+### Exponential Distribution
+
+**Notation**: X ~ Exp(λ)
+
+#### Mean and Standard Deviation Formulas
+
+```
+Mean (μ) = 1/λ
+Variance (σ²) = 1/λ²
+Standard Deviation (σ) = 1/λ
+Skewness = 2
+```
+
+### Gamma Distribution
+
+**Notation**: X ~ Gamma(α, β) where α is shape, β is rate
+
+#### Mean and Standard Deviation Formulas
+
+```
+Mean (μ) = α/β
+Variance (σ²) = α/β²
+Standard Deviation (σ) = √(α)/β
+Skewness = 2/√α
+```
+
+### Beta Distribution
+
+**Notation**: X ~ Beta(α, β)
+
+#### Mean and Standard Deviation Formulas
+
+```
+Mean (μ) = α/(α + β)
+Variance (σ²) = (α·β)/[(α + β)²·(α + β + 1)]
+Standard Deviation (σ) = √{(α·β)/[(α + β)²·(α + β + 1)]}
+```
+
+### Weibull Distribution
+
+**Notation**: X ~ Weibull(k, λ) where k is shape, λ is scale
+
+#### Mean and Standard Deviation Formulas
+
+```
+Mean (μ) = λ·Γ(1 + 1/k)
+Variance (σ²) = λ²·[Γ(1 + 2/k) - (Γ(1 + 1/k))²]
+Standard Deviation (σ) = λ·√[Γ(1 + 2/k) - (Γ(1 + 1/k))²]
+```
+
+Where Γ is the Gamma function.
 
 ---
 
@@ -556,3 +709,5 @@ Understanding non-Gaussian distributions is crucial for:
 3. **Transformation power**: Can often normalize non-Gaussian data
 4. **Context matters**: Understanding the underlying process helps choose appropriate distributions
 5. **Financial implications**: Kurtosis and tail behavior critical for risk assessment
+6. **Mean and variance existence**: Some distributions (like Pareto) may not have finite moments for all parameter values
+7. **Parameter constraints**: Many distributions have restrictions on when moments exist (e.g., Pareto requires α > 1 for finite mean)

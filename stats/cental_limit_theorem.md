@@ -4,10 +4,11 @@
 
 1. [Bernoulli Distribution](#bernoulli-distribution)
 2. [Binomial Distribution](#binomial-distribution)
-3. [Sampling Distribution](#sampling-distribution)
-4. [Central Limit Theorem](#central-limit-theorem)
-5. [Case Studies](#case-studies)
-6. [Practical Applications](#practical-applications)
+3. [Poisson Distribution](#poisson-distribution)
+4. [Sampling Distribution](#sampling-distribution)
+5. [Central Limit Theorem](#central-limit-theorem)
+6. [Case Studies](#case-studies)
+7. [Practical Applications](#practical-applications)
 
 ---
 
@@ -42,9 +43,38 @@ P(X = x) = p^x * (1-p)^(1-x)  for x ∈ {0, 1}
 
 #### Key Statistics
 
-- **Mean (μ)**: p
-- **Variance (σ²)**: p(1-p)
-- **Standard Deviation (σ)**: √[p(1-p)]
+**Mean (μ):**
+
+```
+μ = E[X] = p
+```
+
+**Variance (σ²):**
+
+```
+σ² = Var(X) = p(1-p)
+```
+
+**Standard Deviation (σ):**
+
+```
+σ = √[p(1-p)]
+```
+
+**Derivation of Mean:**
+
+```
+E[X] = 0 × P(X = 0) + 1 × P(X = 1)
+     = 0 × (1-p) + 1 × p
+     = p
+```
+
+**Derivation of Variance:**
+
+```
+E[X²] = 0² × P(X = 0) + 1² × P(X = 1) = p
+Var(X) = E[X²] - (E[X])² = p - p² = p(1-p)
+```
 
 ### Applications in Machine Learning
 
@@ -96,9 +126,41 @@ Where:
 
 #### Key Statistics
 
-- **Mean (μ)**: np
-- **Variance (σ²)**: np(1-p)
-- **Standard Deviation (σ)**: √[np(1-p)]
+**Mean (μ):**
+
+```
+μ = E[X] = np
+```
+
+**Variance (σ²):**
+
+```
+σ² = Var(X) = np(1-p)
+```
+
+**Standard Deviation (σ):**
+
+```
+σ = √[np(1-p)]
+```
+
+**Derivation of Mean:**
+
+```
+E[X] = E[X₁ + X₂ + ... + Xₙ]
+     = E[X₁] + E[X₂] + ... + E[Xₙ]  (linearity of expectation)
+     = p + p + ... + p  (n times)
+     = np
+```
+
+**Derivation of Variance:**
+
+```
+Var(X) = Var(X₁ + X₂ + ... + Xₙ)
+       = Var(X₁) + Var(X₂) + ... + Var(Xₙ)  (independence)
+       = p(1-p) + p(1-p) + ... + p(1-p)  (n times)
+       = np(1-p)
+```
 
 ### Criteria for Binomial Distribution
 
@@ -172,6 +234,198 @@ P(X = 3) = C(3,3) * (0.5)^3 * (0.5)^0 = 1 * 0.125 * 1 = 0.125
 
 ---
 
+## Poisson Distribution
+
+### What is Poisson Distribution?
+
+The **Poisson distribution** models the **number of events occurring** in a **fixed interval of time or space**, given that these events occur with a **known constant mean rate** and are **independent** of the time since the last event.
+
+**Historical Context**: Named after French mathematician **Siméon Denis Poisson**, who published it in 1837.
+
+### Mathematical Properties
+
+#### Parameters
+
+- **λ (lambda)**: Average rate of occurrence (λ > 0)
+  - Also represents both the mean and variance of the distribution
+
+#### Probability Mass Function (PMF)
+
+```
+P(X = k) = (λ^k * e^(-λ)) / k!
+```
+
+Where:
+
+- **k** = number of events (k = 0, 1, 2, 3, ...)
+- **e** ≈ 2.71828 (Euler's number)
+- **k!** = factorial of k
+
+#### Key Statistics
+
+**Mean (μ):**
+
+```
+μ = E[X] = λ
+```
+
+**Variance (σ²):**
+
+```
+σ² = Var(X) = λ
+```
+
+**Standard Deviation (σ):**
+
+```
+σ = √λ
+```
+
+**Important Property**: In Poisson distribution, the mean equals the variance (μ = σ² = λ)
+
+### Conditions for Poisson Distribution
+
+1. **Constant Rate**: Events occur at a constant average rate λ
+2. **Independence**: Occurrence of one event doesn't affect probability of another
+3. **Rare Events**: Events are relatively rare in the given interval
+4. **Fixed Interval**: Time or space interval is fixed
+5. **Non-simultaneous**: Two events cannot occur at exactly the same instant
+
+### Relationship to Binomial Distribution
+
+**Poisson Approximation to Binomial**: When n is large and p is small such that np = λ (constant):
+
+```
+Binomial(n, p) ≈ Poisson(λ) where λ = np
+```
+
+**Rule of thumb**: Use when n ≥ 100 and np ≤ 10
+
+### Example Problems
+
+#### Example 1: Call Center
+
+**Scenario**: A call center receives an average of 3 calls per minute.
+
+**Question**: What's the probability of receiving exactly 5 calls in the next minute?
+
+**Solution**:
+
+```
+λ = 3 (calls per minute)
+P(X = 5) = (3^5 * e^(-3)) / 5!
+         = (243 * 0.0498) / 120
+         = 0.101 or 10.1%
+```
+
+#### Example 2: Website Traffic
+
+**Scenario**: A website receives 2 visitors per hour on average.
+
+**Questions**:
+
+1. **No visitors in the next hour**:
+
+```
+P(X = 0) = (2^0 * e^(-2)) / 0! = e^(-2) = 0.135 or 13.5%
+```
+
+2. **More than 3 visitors**:
+
+```
+P(X > 3) = 1 - P(X ≤ 3) = 1 - [P(X=0) + P(X=1) + P(X=2) + P(X=3)]
+         = 1 - 0.857 = 0.143 or 14.3%
+```
+
+### Applications
+
+#### 1. Quality Control and Manufacturing
+
+**Examples**:
+
+- Number of defects per batch
+- Machine failures per day
+- Customer complaints per week
+
+**Benefits**:
+
+- Predict maintenance needs
+- Set quality standards
+- Optimize production schedules
+
+#### 2. Network and System Reliability
+
+**Examples**:
+
+- Server crashes per month
+- Network packet losses per second
+- System errors per hour
+
+**Benefits**:
+
+- Capacity planning
+- Performance monitoring
+- SLA (Service Level Agreement) design
+
+#### 3. Biology and Medicine
+
+**Examples**:
+
+- Number of mutations per DNA sequence
+- Patient arrivals at emergency room
+- Bacterial colonies per sample
+
+**Benefits**:
+
+- Medical resource planning
+- Epidemiological studies
+- Drug efficacy testing
+
+#### 4. Finance and Insurance
+
+**Examples**:
+
+- Insurance claims per month
+- Trading anomalies per day
+- Credit card fraud attempts per hour
+
+**Benefits**:
+
+- Risk assessment
+- Premium calculation
+- Fraud detection systems
+
+#### 5. Marketing and Business
+
+**Examples**:
+
+- Customer arrivals per hour
+- Online orders per day
+- Social media mentions per week
+
+**Benefits**:
+
+- Staffing optimization
+- Inventory management
+- Campaign effectiveness
+
+### Poisson Process
+
+A **Poisson process** is a continuous-time counting process where:
+
+1. **Stationary increments**: Rate doesn't change over time
+2. **Independent increments**: Non-overlapping intervals are independent
+3. **Orderliness**: Probability of multiple events in infinitesimal interval is negligible
+
+**Applications of Poisson Process**:
+
+- Queuing theory
+- Reliability engineering
+- Inventory management
+- Telecommunications
+
+---
+
 ## Sampling Distribution
 
 ### What is Sampling Distribution?
@@ -188,6 +442,48 @@ Any numerical summary computed from a sample:
 - **Sample proportion** (p̂)
 - **Sample variance** (s²)
 - **Sample standard deviation** (s)
+
+#### Mathematical Properties of Sampling Distribution
+
+**For Sample Mean (x̄):**
+
+**Mean of Sampling Distribution:**
+
+```
+μₓ̄ = E[x̄] = μ
+```
+
+**Variance of Sampling Distribution:**
+
+```
+σ²ₓ̄ = Var(x̄) = σ²/n
+```
+
+**Standard Error (Standard Deviation of Sampling Distribution):**
+
+```
+σₓ̄ = σ/√n
+```
+
+**For Sample Proportion (p̂):**
+
+**Mean of Sampling Distribution:**
+
+```
+μₚ̂ = E[p̂] = p
+```
+
+**Variance of Sampling Distribution:**
+
+```
+σ²ₚ̂ = Var(p̂) = p(1-p)/n
+```
+
+**Standard Error:**
+
+```
+σₚ̂ = √[p(1-p)/n]
+```
 
 #### Process of Creating Sampling Distribution
 
@@ -249,9 +545,71 @@ The **Central Limit Theorem (CLT)** states that the **distribution of sample mea
 If X₁, X₂, ..., Xₙ are independent and identically distributed random variables with mean μ and variance σ², then:
 
 ```
-Sample Mean: X̄ = (X₁ + X₂ + ... + Xₙ)/n
+Sample Mean: x̄ = (X₁ + X₂ + ... + Xₙ)/n
 
-As n → ∞: X̄ ~ N(μ, σ²/n)
+As n → ∞: x̄ ~ N(μ, σ²/n)
+```
+
+**Standardized Form:**
+
+```
+Z = (x̄ - μ)/(σ/√n) ~ N(0,1)
+```
+
+### Central Limit Theorem for Different Distributions
+
+#### For Any Distribution
+
+**Mean of Sample Mean:**
+
+```
+μₓ̄ = μ
+```
+
+**Standard Deviation of Sample Mean (Standard Error):**
+
+```
+σₓ̄ = σ/√n
+```
+
+#### For Binomial Distribution
+
+When applying CLT to binomial distribution with parameters n and p:
+
+**Sample Proportion:** p̂ = X/n (where X ~ Binomial(n,p))
+
+**Mean:**
+
+```
+μₚ̂ = p
+```
+
+**Standard Error:**
+
+```
+σₚ̂ = √[p(1-p)/n]
+```
+
+**Normal Approximation:**
+
+```
+p̂ ~ N(p, p(1-p)/n) for large n
+```
+
+#### For Poisson Distribution
+
+When applying CLT to Poisson distribution with parameter λ:
+
+**Mean:**
+
+```
+μₓ̄ = λ
+```
+
+**Standard Error:**
+
+```
+σₓ̄ = √(λ/n)
 ```
 
 ### Conditions Required for CLT
@@ -466,6 +824,27 @@ print(f"95% Confidence Interval: [{lower_bound:.2f}, {upper_bound:.2f}]")
 - Economic factors may vary across regions
 - Temporal considerations (income changes over time)
 
+### Case Study 3: Website Error Rate Analysis (Poisson Application)
+
+#### Objective
+
+Analyze website server errors using Poisson distribution and apply CLT for error rate estimation.
+
+#### Methodology
+
+1. **Data Collection**: Monitor server errors per hour over multiple days
+2. **Poisson Modeling**: Model hourly error count using Poisson distribution
+3. **Parameter Estimation**: Estimate λ (average error rate)
+4. **CLT Application**: Use sample means to estimate population error rate
+5. **Quality Control**: Set thresholds for acceptable error rates
+
+#### Expected Results
+
+- **Error Pattern**: Errors follow Poisson distribution
+- **Rate Estimation**: λ represents average errors per hour
+- **Control Limits**: Use CLT to set monitoring thresholds
+- **Process Improvement**: Identify when system needs attention
+
 ---
 
 ## Practical Applications
@@ -483,6 +862,13 @@ Monitor production processes using CLT principles.
 3. Calculate sample means
 4. Use control charts based on normal distribution
 5. Detect when process goes "out of control"
+
+**Statistical Formulas**:
+
+```
+Upper Control Limit = μ + 3σ/√n
+Lower Control Limit = μ - 3σ/√n
+```
 
 **Benefits**:
 
@@ -504,6 +890,12 @@ Compare effectiveness of different marketing strategies.
 4. Apply CLT for comparing group means
 5. Statistical testing for significant differences
 
+**Statistical Test**:
+
+```
+Z = (p̂₁ - p̂₂) / √[p̂(1-p̂)(1/n₁ + 1/n₂)]
+```
+
 **Benefits**:
 
 - Data-driven decision making
@@ -523,6 +915,12 @@ Evaluate effectiveness of treatments and medications.
 3. Apply CLT to compare group means
 4. Calculate confidence intervals for effect sizes
 5. Hypothesis testing for treatment efficacy
+
+**Effect Size Calculation**:
+
+```
+Cohen's d = (μ₁ - μ₂) / σₚₒₒₗₑ_
+```
 
 **Benefits**:
 
@@ -544,6 +942,13 @@ Assess portfolio risk and expected returns.
 4. Estimate Value at Risk (VaR)
 5. Make investment decisions based on risk profiles
 
+**Portfolio Statistics**:
+
+```
+Portfolio Mean = Σ(wᵢ × μᵢ)
+Portfolio Variance = Σ(wᵢ² × σᵢ²) + 2ΣΣ(wᵢwⱼσᵢⱼ)
+```
+
 **Benefits**:
 
 - Quantified risk assessment
@@ -564,11 +969,44 @@ Estimate population opinions and characteristics from samples.
 4. Apply CLT for confidence intervals
 5. Report margins of error
 
+**Margin of Error**:
+
+```
+ME = z_α/2 × √[p̂(1-p̂)/n]
+```
+
 **Benefits**:
 
 - Cost-effective population estimation
 - Political and market research
 - Public policy decision support
+
+### 6. Network Traffic Analysis (Poisson Applications)
+
+#### Application
+
+Model and predict network traffic patterns.
+
+**Process**:
+
+1. Monitor packet arrivals per time interval
+2. Model using Poisson distribution
+3. Estimate traffic intensity (λ)
+4. Use CLT for confidence intervals on traffic rates
+5. Capacity planning and resource allocation
+
+**Queuing Theory Formulas**:
+
+```
+Traffic Intensity: ρ = λ/μ
+System Utilization: U = ρ × 100%
+```
+
+**Benefits**:
+
+- Network capacity planning
+- Performance optimization
+- Service level management
 
 ---
 
@@ -578,23 +1016,51 @@ Estimate population opinions and characteristics from samples.
 
 #### 1. Foundation Distributions
 
-- **Bernoulli**: Single binary trial (success/failure)
-- **Binomial**: Multiple independent binary trials
-- **Sampling**: Distribution of sample statistics
+**Bernoulli Distribution**:
 
-#### 2. Central Limit Theorem Power
+- Mean: μ = p
+- Variance: σ² = p(1-p)
+- Standard Deviation: σ = √[p(1-p)]
+
+**Binomial Distribution**:
+
+- Mean: μ = np
+- Variance: σ² = np(1-p)
+- Standard Deviation: σ = √[np(1-p)]
+
+**Poisson Distribution**:
+
+- Mean: μ = λ
+- Variance: σ² = λ
+- Standard Deviation: σ = √λ
+
+#### 2. Sampling Distribution Properties
+
+**Sample Mean**:
+
+- Mean: μₓ̄ = μ
+- Standard Error: σₓ̄ = σ/√n
+
+**Sample Proportion**:
+
+- Mean: μₚ̂ = p
+- Standard Error: σₚ̂ = √[p(1-p)/n]
+
+#### 3. Central Limit Theorem Power
 
 - **Universal applicability**: Works regardless of original distribution
 - **Normal approximation**: Sample means approach normality
 - **Predictable properties**: Known mean and standard error
+- **Standard form**: Z = (x̄ - μ)/(σ/√n) ~ N(0,1)
 
-#### 3. Practical Requirements
+#### 4. Practical Requirements
 
 - **Sample size**: Generally n ≥ 30 for CLT
 - **Independence**: Random sampling essential
 - **Representativeness**: Samples must reflect population
+- **Finite variance**: Population variance must be finite
 
-#### 4. Real-World Impact
+#### 5. Real-World Impact
 
 - **Statistical inference**: Foundation for hypothesis testing
 - **Quality control**: Manufacturing and service industries
@@ -624,4 +1090,22 @@ Estimate population opinions and characteristics from samples.
 - Communicate uncertainty appropriately
 - Make data-driven recommendations
 
-The Central Limit Theorem provides the theoretical foundation for much of inferential statistics and enables us to make reliable conclusions about populations based on sample data, making it one of the most important concepts in statistics and data science.
+#### 4. Distribution Selection
+
+**Choose Bernoulli when**:
+
+- Single binary trial
+- Yes/no, success/failure outcomes
+
+**Choose Binomial when**:
+
+- Fixed number of independent binary trials
+- Constant probability of success
+
+**Choose Poisson when**:
+
+- Counting rare events in fixed intervals
+- Events occur independently at constant rate
+- Mean equals variance (λ)
+
+The Central Limit Theorem provides the theoretical foundation for much of inferential statistics and enables us to make reliable conclusions about populations based on sample data, making it one of the most important concepts in statistics and data science. Understanding the mathematical properties of these fundamental distributions and their applications through CLT is crucial for anyone working with data analysis, machine learning, or statistical inference.

@@ -32,6 +32,7 @@ The alternative hypothesis is a statement that contradicts the null hypothesis a
 - **How to decide what will be Null hypothesis and what will be Alternate Hypothesis**: Typically the Null hypothesis says nothing new is happening
 - **We try to gather evidence to reject the null hypothesis**
 - **It's important to note that failing to reject the null hypothesis doesn't necessarily mean that the null hypothesis is true**; it just means that there isn't enough evidence to support the alternative hypothesis.
+  “I don’t have strong enough evidence to conclude the alternative hypothesis is true.”
 
 ## Steps in Hypothesis Testing
 
