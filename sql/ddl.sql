@@ -1,4 +1,4 @@
--- File: ddl_commands_with_named_pk_mysql.sql
+-- File: ddl.sql
 -- Purpose: Demonstrates all DDL commands in MySQL with named PRIMARY KEY constraints using CONSTRAINT syntax
 
 -- --------------------------------------
@@ -12,7 +12,8 @@ CREATE DATABASE school_db;
 USE school_db;
 
 -- 1.3 CREATE TABLE
-CREATE TABLE school_db.students (
+CREATE TABLE school_db.students
+(
     student_id INT NOT NULL,
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50),
@@ -25,7 +26,8 @@ CREATE TABLE school_db.students (
 );
 
 -- 1.4 CREATE TABLE with Composite Primary Key
-CREATE TABLE school_db.student_courses (
+CREATE TABLE school_db.student_courses
+(
     student_id INT,
     course_id INT,
     enrollment_date DATE NOT NULL,
@@ -33,13 +35,15 @@ CREATE TABLE school_db.student_courses (
 );
 
 -- 1.5 CREATE TABLE with FOREIGN KEY
-CREATE TABLE school_db.departments (
+CREATE TABLE school_db.departments
+(
     department_id INT NOT NULL,
     department_name VARCHAR(100) UNIQUE,
     CONSTRAINT department_pk PRIMARY KEY (department_id)
 );
 
-CREATE TABLE school_db.courses (
+CREATE TABLE school_db.courses
+(
     course_id INT NOT NULL,
     course_name VARCHAR(100) NOT NULL,
     department_id INT,
@@ -55,10 +59,11 @@ CREATE INDEX idx_student_email ON school_db.students(email);
 CREATE UNIQUE INDEX idx_unique_course_name ON school_db.courses(course_name);
 
 -- 1.8 CREATE VIEW
-CREATE VIEW school_db.student_summary AS
-SELECT student_id, first_name, last_name, email
-FROM school_db.students
-WHERE gpa > 3.0;
+CREATE VIEW school_db.student_summary
+AS
+    SELECT student_id, first_name, last_name, email
+    FROM school_db.students
+    WHERE gpa > 3.0;
 
 -- --------------------------------------
 -- 2. ALTER Command
@@ -70,7 +75,8 @@ ADD phone_number VARCHAR(15);
 
 -- 2.2 Modify Column
 ALTER TABLE school_db.students
-MODIFY phone_number VARCHAR(20);
+MODIFY phone_number VARCHAR
+(20);
 
 -- 2.3 Drop Column
 ALTER TABLE school_db.students
@@ -78,7 +84,8 @@ DROP COLUMN phone_number;
 
 -- 2.4 Add Constraint
 ALTER TABLE school_db.students
-ADD CONSTRAINT chk_email_format CHECK (email REGEXP '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$');
+ADD CONSTRAINT chk_email_format CHECK (email
+REGEXP '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$');
 
 -- 2.5 Drop Constraint
 ALTER TABLE school_db.students
@@ -86,7 +93,8 @@ DROP CHECK chk_email_format;
 
 -- 2.6 Rename Column
 ALTER TABLE school_db.students
-CHANGE email email_address VARCHAR(100) UNIQUE;
+CHANGE email email_address VARCHAR
+(100) UNIQUE;
 
 -- 2.7 Rename Table
 RENAME TABLE school_db.students TO school_db.student_records;
@@ -127,16 +135,19 @@ DROP CHECK chk_email_format;
 TRUNCATE TABLE school_db.student_records;
 
 -- 4.2 TRUNCATE with CASCADE
-SET FOREIGN_KEY_CHECKS = 0;
+SET FOREIGN_KEY_CHECKS
+= 0;
 TRUNCATE TABLE school_db.student_records;
-SET FOREIGN_KEY_CHECKS = 1;
+SET FOREIGN_KEY_CHECKS
+= 1;
 
 -- --------------------------------------
 -- 5. Constraints in Detail
 -- --------------------------------------
 
 -- 5.1 NOT NULL Constraint
-CREATE TABLE school_db.teachers (
+CREATE TABLE school_db.teachers
+(
     teacher_id INT NOT NULL,
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
@@ -144,7 +155,8 @@ CREATE TABLE school_db.teachers (
 );
 
 -- 5.3 PRIMARY KEY Constraint
-CREATE TABLE school_db.classes (
+CREATE TABLE school_db.classes
+(
     class_id INT,
     course_id INT NOT NULL,
     class_room VARCHAR(10),
@@ -152,7 +164,8 @@ CREATE TABLE school_db.classes (
 );
 
 -- 5.4 FOREIGN KEY Constraint
-CREATE TABLE school_db.class_schedule (
+CREATE TABLE school_db.class_schedule
+(
     schedule_id INT NOT NULL,
     class_id INT,
     day_of_week VARCHAR(10),
@@ -162,7 +175,8 @@ CREATE TABLE school_db.class_schedule (
 );
 
 -- 5.5 CHECK Constraint
-CREATE TABLE school_db.exams (
+CREATE TABLE school_db.exams
+(
     exam_id INT NOT NULL,
     course_id INT,
     exam_date DATE,
@@ -172,7 +186,8 @@ CREATE TABLE school_db.exams (
 );
 
 -- 5.6 DEFAULT Constraint
-CREATE TABLE school_db.attendance (
+CREATE TABLE school_db.attendance
+(
     attendance_id INT NOT NULL,
     student_id INT,
     class_id INT,
@@ -192,17 +207,24 @@ FROM school_db.student_records
 WHERE gpa > 3.5;
 
 -- 6.2 CREATE TEMPORARY TABLE
-CREATE TEMPORARY TABLE school_db.temp_student (
+CREATE TEMPORARY TABLE school_db.temp_student
+(
     student_id INT NOT NULL,
-    first_name VARCHAR(50),
-    CONSTRAINT temp_student_pk PRIMARY KEY (student_id)
+    first_name VARCHAR
+(50),
+    CONSTRAINT temp_student_pk PRIMARY KEY
+(student_id)
 );
 
 -- 6.4 CREATE SEQUENCE (MySQL uses AUTO_INCREMENT instead)
-CREATE TABLE school_db.new_students (
-    student_id INT NOT NULL AUTO_INCREMENT,
-    first_name VARCHAR(50),
-    CONSTRAINT new_student_pk PRIMARY KEY (student_id)
+CREATE TABLE school_db.new_students
+(
+    student_id INT NOT NULL
+    AUTO_INCREMENT,
+    first_name VARCHAR
+    (50),
+    CONSTRAINT new_student_pk PRIMARY KEY
+    (student_id)
 );
 
 -- --------------------------------------

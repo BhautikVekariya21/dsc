@@ -52,17 +52,17 @@ df.to_sql("<table_name>", con=engine)
 
 -- Answer:
 SELECT DISTINCT name
-FROM olympic 
+FROM olympic
 WHERE name IN (
-    SELECT name  
-    FROM olympic 
-    WHERE year = 2008 
-      AND medal = 'Gold'
+    SELECT name
+  FROM olympic
+  WHERE year = 2008
+    AND medal = 'Gold'
 )
   AND height > (
     SELECT AVG(height)
-    FROM olympic
-    WHERE year = 2008
+  FROM olympic
+  WHERE year = 2008
 );
 
 -- ===============================
@@ -80,9 +80,9 @@ WHERE sport = 'Basketball'
   AND medal IN ('Gold', 'Silver', 'Bronze')
   AND weight < (
       SELECT AVG(weight)
-      FROM olympic
-      WHERE year = 2016
-        AND medal IN ('Gold', 'Silver', 'Bronze')
+  FROM olympic
+  WHERE year = 2016
+    AND medal IN ('Gold', 'Silver', 'Bronze')
   );
 
 -- ===============================
@@ -93,24 +93,21 @@ WHERE sport = 'Basketball'
 -- in both the 2008 and 2016 Olympics.
 
 -- Answer:
-SELECT DISTINCT name 
-FROM olympic 
+SELECT DISTINCT name
+FROM olympic
 WHERE sport = 'Swimming'
   AND medal IN ('Gold', 'Silver', 'Bronze')
   AND name IN (
     SELECT name
-    FROM olympic
-    WHERE sport = 'Swimming'
-      AND medal IN ('Gold', 'Silver', 'Bronze')
-      AND year = 2008
+  FROM olympic
+  WHERE sport = 'Swimming' AND medal IN ('Gold', 'Silver', 'Bronze') AND year = 2008
   )
   AND name IN (
     SELECT name
-    FROM olympic
-    WHERE sport = 'Swimming'
-      AND medal IN ('Gold', 'Silver', 'Bronze')
-      AND year = 2016
+  FROM olympic
+  WHERE sport = 'Swimming' AND medal IN ('Gold', 'Silver', 'Bronze') AND year = 2016
   );
+
 
 -- ===============================
 -- PROBLEM 4
@@ -119,11 +116,14 @@ WHERE sport = 'Swimming'
 -- Display the names of all countries that have won more than 50 medals in a single year.
 
 -- Answer:
-WITH winning_team AS (
+WITH
+  winning_team
+  AS
+  (
     SELECT team, year
     FROM olympic
     WHERE medal IN ('Gold', 'Silver', 'Bronze')
-)
+  )
 SELECT team, year
 FROM winning_team
 GROUP BY team, year
@@ -142,10 +142,10 @@ FROM olympic
 WHERE medal IN ('Gold', 'Silver', 'Bronze')
   AND name IN (
       SELECT name
-      FROM olympic
-      WHERE medal IN ('Gold', 'Silver', 'Bronze')
-      GROUP BY name, year
-      HAVING COUNT(DISTINCT sport) > 1
+  FROM olympic
+  WHERE medal IN ('Gold', 'Silver', 'Bronze')
+  GROUP BY name, year
+  HAVING COUNT(DISTINCT sport) > 1
   );
 
 -- ===============================
@@ -156,19 +156,19 @@ WHERE medal IN ('Gold', 'Silver', 'Bronze')
 -- who have won a medal in the same event?
 
 -- Answer:
-SELECT 
-    event,
-    ROUND(male_avg - female_avg, 2) AS avg_weight_difference
+SELECT
+  event,
+  ROUND(male_avg - female_avg, 2) AS avg_weight_difference
 FROM (
-    SELECT 
-        event,
-        AVG(CASE WHEN sex = 'M' THEN weight ELSE NULL END) AS male_avg,
-        AVG(CASE WHEN sex = 'F' THEN weight ELSE NULL END) AS female_avg
-    FROM olympic
-    WHERE medal IN ('Gold', 'Silver', 'Bronze') 
-      AND weight IS NOT NULL
-    GROUP BY event
-    HAVING COUNT(DISTINCT sex) = 2  -- Ensures both male and female participated
+    SELECT
+    event,
+    AVG(CASE WHEN sex = 'M' THEN weight ELSE NULL END) AS male_avg,
+    AVG(CASE WHEN sex = 'F' THEN weight ELSE NULL END) AS female_avg
+  FROM olympic
+  WHERE medal IN ('Gold', 'Silver', 'Bronze')
+    AND weight IS NOT NULL
+  GROUP BY event
+  HAVING COUNT(DISTINCT sex) = 2  -- Ensures both male and female participated
 ) AS gender_weights;
 
 -- ===============================
@@ -186,18 +186,18 @@ FROM (
 -- who are smokers and have at least one child, and belong to the southeast region?
 
 -- Answer:
-SELECT 
-    COUNT(*) AS total_patients
+SELECT
+  COUNT(*) AS total_patients
 FROM insurance_data
-WHERE smoker = 'Yes' 
-  AND children >= 1 
+WHERE smoker = 'Yes'
+  AND children >= 1
   AND region = 'southeast'
   AND charges > (
       SELECT AVG(charges)
-      FROM insurance_data
-      WHERE smoker = 'Yes' 
-        AND children >= 1 
-        AND region = 'southeast'
+  FROM insurance_data
+  WHERE smoker = 'Yes'
+    AND children >= 1
+    AND region = 'southeast'
   );
 
 -- ===============================
@@ -208,20 +208,20 @@ WHERE smoker = 'Yes'
 -- who are not smokers and have a BMI greater than the average BMI for patients who have at least one child?
 
 -- Answer:
-SELECT 
-    COUNT(*) AS total_patients
+SELECT COUNT(*) AS total_patients
 FROM insurance_data
-WHERE smoker = 'No' 
-  AND bmi > (
-      SELECT AVG(bmi)
-      FROM insurance_data
-      WHERE children >= 1
+WHERE 
+  charges > (
+    SELECT AVG(charges)
+  FROM insurance_data
+  WHERE smoker = 'No'
   )
-  AND charges > (
-      SELECT AVG(charges)
-      FROM insurance_data
-      WHERE smoker = 'No'
+  AND bmi > (
+    SELECT AVG(bmi)
+  FROM insurance_data
+  WHERE children >= 1
   );
+
 
 -- ===============================
 -- PROBLEM 9
@@ -231,23 +231,20 @@ WHERE smoker = 'No'
 -- who have a BMI greater than the average BMI for patients who are diabetic, 
 -- have at least one child, and are from the southwest region?
 
--- Note: This problem assumes there's a 'diabetic' column in the dataset.
--- If not available, you may need to define diabetic criteria based on other columns.
-
 -- Answer:
-SELECT 
-    COUNT(*) AS total_patients
+SELECT
+  COUNT(*) AS total_patients
 FROM insurance_data
 WHERE bmi > (
       SELECT AVG(bmi)
-      FROM insurance_data
-      WHERE diabetic = 'Yes' 
-        AND children >= 1
-        AND region = 'southwest'
+  FROM insurance_data
+  WHERE diabetic = 'Yes'
+    AND children >= 1
+    AND region = 'southwest'
   )
   AND charges > (
       SELECT AVG(charges)
-      FROM insurance_data
+  FROM insurance_data
   );
 
 -- ===============================
@@ -258,17 +255,17 @@ WHERE bmi > (
 -- and patients who are non-smokers, and have the same BMI and number of children?
 
 -- Answer:
-SELECT 
-    ROUND(ABS(AVG(smoker_avg - non_smoker_avg)), 2) AS avg_claim_difference
+SELECT
+  ROUND(ABS(AVG(smoker_avg - non_smoker_avg)), 2) AS avg_claim_difference
 FROM (
     SELECT
-        bmi,
-        children,
-        AVG(CASE WHEN smoker = 'Yes' THEN charges ELSE NULL END) AS smoker_avg,
-        AVG(CASE WHEN smoker = 'No' THEN charges ELSE NULL END) AS non_smoker_avg
-    FROM insurance_data
-    GROUP BY bmi, children
-    HAVING smoker_avg IS NOT NULL AND non_smoker_avg IS NOT NULL
+    bmi,
+    children,
+    AVG(CASE WHEN smoker = 'Yes' THEN charges ELSE NULL END) AS smoker_avg,
+    AVG(CASE WHEN smoker = 'No' THEN charges ELSE NULL END) AS non_smoker_avg
+  FROM insurance_data
+  GROUP BY bmi, children
+  HAVING smoker_avg IS NOT NULL AND non_smoker_avg IS NOT NULL
 ) AS filtered_comparison;
 
 -- ===============================

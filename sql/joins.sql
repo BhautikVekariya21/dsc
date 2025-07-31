@@ -122,11 +122,13 @@ WHERE c.category_name = 'Chairs';
 SELECT * FROM orders
 ORDER BY profit DESC;
 
--- 11.2 Customer with max number of orders
-SELECT user_id, COUNT(*) AS order_count
-FROM orders
-GROUP BY user_id
-ORDER BY order_count DESC
+-- 11.2 Most profitable product
+SELECT p.product_name, SUM(o.profit) AS total_profit
+FROM order_details od
+JOIN products p ON od.product_id = p.product_id
+JOIN orders o ON od.order_id = o.order_id
+GROUP BY p.product_name
+ORDER BY total_profit DESC
 LIMIT 1;
 
 -- 11.3 Most profitable category

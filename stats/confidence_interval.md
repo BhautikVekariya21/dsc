@@ -9,6 +9,14 @@
 5. [Factors Affecting Margin of Error](#factors-affecting-margin-of-error)
 6. [Visualizations with Code](#visualizations-with-code)
 
+| Situation                                                             | Should you use t-distribution?               |
+| --------------------------------------------------------------------- | -------------------------------------------- |
+| σ unknown, n small (<30), and data is approximately normal            | ✅ Yes — textbook use of t-dist.             |
+| σ unknown, n large (≥30), CLT applies, data not too skewed            | ✅ Yes — t-dist. still used; approaches Z    |
+| σ known, even with small or large sample size                         | ❌ No — use **Z-distribution**               |
+| σ unknown, n small, but data is clearly **not normal** (e.g., skewed) | ⚠️ Be **cautious** — t-test may not be valid |
+| σ unknown, n large, but data has strong outliers or is heavily skewed | ⚠️ Consider **non-parametric** tests instead |
+
 ## Basic Concepts
 
 ### Population vs Sample
