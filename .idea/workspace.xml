@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1d595068-9268-43f7-8ca4-34e8d7a311d8" name="Changes" comment="Add Streamlit app for email and SMS spam classification; implement text preprocessing, model loading, and prediction display" />
+    <list default="true" id="1d595068-9268-43f7-8ca4-34e8d7a311d8" name="Changes" comment="Add Streamlit app for email and SMS spam classification; implement text preprocessing, model loading, and prediction display">
+      <change afterPath="$PROJECT_DIR$/streamlit/sms/app.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/streamlit/sms/app.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/streamlit/sms/spam.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,6 +18,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Jupyter Notebook" />
         <option value="Python Script" />
       </list>
     </option>
@@ -50,10 +56,17 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/bhaut/OneDrive/Desktop/dsc/streamlit/sms&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\bhaut\OneDrive\Desktop\dsc\streamlit\sms" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="app" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="dsc" />
