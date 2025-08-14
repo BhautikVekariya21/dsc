@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1d595068-9268-43f7-8ca4-34e8d7a311d8" name="Changes" comment="Add Streamlit app for email and SMS spam classification; implement text preprocessing, model loading, and prediction display">
-      <change afterPath="$PROJECT_DIR$/streamlit/sms/app.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/streamlit/sms/app.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/streamlit/sms/spam.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="1d595068-9268-43f7-8ca4-34e8d7a311d8" name="Changes" comment="Add Streamlit app for email and SMS spam classification; implement text preprocessing, model loading, and prediction display. Include Jupyter notebook for data analysis and model evaluation." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -159,13 +154,23 @@
       <option name="project" value="LOCAL" />
       <updated>1755187566925</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Add Streamlit app for email and SMS spam classification; implement text preprocessing, model loading, and prediction display. Include Jupyter notebook for data analysis and model evaluation.">
+      <option name="closed" value="true" />
+      <created>1755192087344</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1755192087344</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="addded mnist dataset for various ml model training" />
     <MESSAGE value="Add initial project configuration files and requirements; include VCS settings, .gitignore, and Python dependencies" />
+    <MESSAGE value="Clean repo: removed large MNIST dataset commit" />
     <MESSAGE value="Add Streamlit app for email and SMS spam classification; implement text preprocessing, model loading, and prediction display" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add Streamlit app for email and SMS spam classification; implement text preprocessing, model loading, and prediction display" />
+    <MESSAGE value="Add Streamlit app for email and SMS spam classification; implement text preprocessing, model loading, and prediction display. Include Jupyter notebook for data analysis and model evaluation." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add Streamlit app for email and SMS spam classification; implement text preprocessing, model loading, and prediction display. Include Jupyter notebook for data analysis and model evaluation." />
   </component>
 </project>
